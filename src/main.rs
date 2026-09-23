@@ -1,6 +1,7 @@
 use rfd::FileDialog;
 use std::fs;
 
+mod create_compressed;
 fn main() {
 
     let file = FileDialog::new()
@@ -30,7 +31,7 @@ fn main() {
                 if count > 1 {
                     if bytes[i] != bytes[i + 1] {
 
-                        let mut value = format!("{}*{}", bytes[i], count);
+                        let value = format!("{}*{}", bytes[i], count);
                         count = 1;
                         compressed.push(value);
 
@@ -41,12 +42,14 @@ fn main() {
 
             }
 
-            println!("Compressed array: {:?}", compressed.len());
-            println!("Original array: {:?}", bytes.len());
+            println!("Compressed array: {}", compressed.len());
+            println!("Original array: {}", bytes.len());
+
+            create_compressed::create_compressed();
 
         }
         None => {
-            println!("No path choosed");
+            println!("No path chose");
         }
     }
 
